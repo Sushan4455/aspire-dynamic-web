@@ -2,7 +2,7 @@ import React from "react";
 
 // ✅ Import all images from src/team
 import roshanaImg from "../assets/team/roshana.jpg";
-import depcenaImg from "../assets/team/Depcena.jpg";
+import depcenaImg from "../assets/team/depcena.jpg";
 import bidhyaImg from "../assets/team/bidhya.jpg";
 import sushanImg from "../assets/team/sushan.jpg";
 import suzuImg from "../assets/team/suzu-karki.jpg";
