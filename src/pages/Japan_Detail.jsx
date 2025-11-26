@@ -1,7 +1,7 @@
 // Japan_Detail.jsx
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";   // 🔧 adjust path if needed
-import Footer from "../components/Footer";   // 🔧 adjust path if needed
+import Footer from "../components/footer";   // 🔧 adjust path if needed
 
 const faqDataJapan = [
   {

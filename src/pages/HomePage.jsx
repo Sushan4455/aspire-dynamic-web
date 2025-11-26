@@ -6,7 +6,7 @@ import AppointmentSection from "../components/Appointment";
 import HearFromCounsellors from "../components/counsellors";
 import Action from "../components/Action";
 import LatestBlogsSection from "../components/Blog";
-import Footer from "../components/Footer";
+import Footer from "../components/footer";
 import EventsSection from "../components/Event";
 import TestimonialReelsSection from "../components/TestimonialReelsSection";
 

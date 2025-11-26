@@ -2,7 +2,7 @@ import AbroadStudySection from "../components/Abroad";
 import CoursesBanner from "../components/CoursesBanner";
 import CoursesSection from "../components/Coursesection";
 import EventsSection from "../components/Event";
-import Footer from "../components/Footer";
+import Footer from "../components/footer";
 import Navbar from "../components/Navbar";
 import StudentTestimonials from "../components/Testimonial";
 
