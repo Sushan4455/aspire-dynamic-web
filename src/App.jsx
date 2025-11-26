@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Destinationpage from "./pages/Studydestination";
-import Courses from "./pages/courses";
+import Courses from "./pages/Courses";   // ✅ correct import
 import TrainingProgram from "./pages/TrainingProgram";
 import TeamPage from "./pages/Teams";
 import Contact from "./pages/Contact";
@@ -16,24 +16,18 @@ import Dubai_Detail from "./pages/Dubai_Detail";
 import CourseRegistration from "./pages/CourseRegistration";
 import ChatbotWidget from "./components/ChatbotWidget";
 
-
-
-
 export default function App() {
   return (
     <>
-
-
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/study-destination" element={<Destinationpage />} />
-         <Route path="/courses" element={<Courses />} />
-         <Route path="/training" element={<TrainingProgram />} />
-         <Route path="/team" element={<TeamPage />} />
-         <Route path="/contact" element={<Contact />} />
-         <Route path="/blogs" element={<BlogPage />} />  {/* ✅ updated */}
-         <Route path="/blogs/:id" element={<BlogDetailPage />} />
-         {/* UK Detail Page */}
+        <Route path="/courses" element={<Courses />} />  {/* ✅ fixed */}
+        <Route path="/training" element={<TrainingProgram />} />
+        <Route path="/team" element={<TeamPage />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/blogs" element={<BlogPage />} />  
+        <Route path="/blogs/:id" element={<BlogDetailPage />} />
         <Route path="/study-in-uk" element={<UK_Detail />} />
         <Route path="/study-in-australia" element={<Australia_Detail />} />
         <Route path="/study-in-usa" element={<USA_Detail />} />
@@ -43,10 +37,6 @@ export default function App() {
         <Route path="/course-registration" element={<CourseRegistration />} />    
       </Routes>
       <ChatbotWidget />
-
     </>
   );
 }
-
-
-
