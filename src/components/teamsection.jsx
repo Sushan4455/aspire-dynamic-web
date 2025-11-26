@@ -1,15 +1,16 @@
 import React from "react";
 
 // ✅ Import all images from src/team
-import roshanaImg from "../team/roshana.jpg";
-import depcenaImg from "../team/Depcena.jpg";
-import bidhyaImg from "../team/bidhya.jpg";
-import sushanImg from "../team/sushan.jpg";
-import suzuImg from "../team/suzu karki.jpg";
-import priyankaImg from "../team/roy.jpg";
-import bimalaImg from "../team/office helper.jpg";
-import sabnamImg from "../team/sabnam.jpg";
-import nishantImg from "../team/9.jpg";
+import roshanaImg from "../assets/team/roshana.jpg";
+import depcenaImg from "../assets/team/Depcena.jpg";
+import bidhyaImg from "../assets/team/bidhya.jpg";
+import sushanImg from "../assets/team/sushan.jpg";
+import suzuImg from "../assets/team/suzu-karki.jpg";
+import priyankaImg from "../assets/team/roy.jpg";
+import bimalaImg from "../assets/team/office-helper.jpg";
+import sabnamImg from "../assets/team/sabnam.jpg";
+import nishantImg from "../assets/team/nishant.jpg";
+
 
 const team = [
   { name: "Roshana Sapkota", img: roshanaImg },
