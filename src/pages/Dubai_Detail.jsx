@@ -1,7 +1,7 @@
 // Dubai_Detail.jsx
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";   // 🔧 adjust path if needed
-import Footer from "../components/Footer";   // 🔧 adjust path if needed
+
 
 const faqDataDubai = [
   {
@@ -415,7 +415,6 @@ const Dubai_Detail = () => {
         </section>
       </main>
 
-      <Footer />
     </>
   );
 };

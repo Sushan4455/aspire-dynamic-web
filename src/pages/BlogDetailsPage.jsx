@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+
 
 
 const BLOG_API_URL =
@@ -117,7 +117,7 @@ export default function BlogDetailPage() {
         </div>
       </main>
 
-      <Footer />
+
     </>
   );
 }

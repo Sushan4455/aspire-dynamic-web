@@ -1,7 +1,7 @@
 // Canada_Detail.jsx
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+
 
 const canadaFaq = [
   {
@@ -367,7 +367,7 @@ const Canada_Detail = () => {
           </section>
         </section>
       </main>
-      <Footer />
+
     </>
   );
 };

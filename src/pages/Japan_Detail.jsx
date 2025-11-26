@@ -1,7 +1,7 @@
 // Japan_Detail.jsx
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";   // 🔧 adjust path if needed
-import Footer from "../components/Footer";   // 🔧 adjust path if needed
+
 
 const faqDataJapan = [
   {
@@ -406,7 +406,6 @@ const Japan_Detail = () => {
         </section>
       </main>
 
-      <Footer />
     </>
   );
 };

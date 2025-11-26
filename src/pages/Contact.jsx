@@ -1,6 +1,6 @@
 
 import ContactSection from "../components/ContactSection";
-import Footer from "../components/Footer";
+
 import Navbar from "../components/Navbar";
 
 
@@ -10,7 +10,7 @@ function Coursepage() {
     <>
       <Navbar />
      <ContactSection />
-        <Footer />
+
     </>
   );
 }
