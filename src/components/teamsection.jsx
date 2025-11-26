@@ -2,7 +2,6 @@ import React from "react";
 
 // ✅ Import all images from src/team
 import roshanaImg from "../assets/team/roshana.jpg";
-import depcenaImg from "../assets/team/depcena.jpg";
 import bidhyaImg from "../assets/team/bidhya.jpg";
 import sushanImg from "../assets/team/sushan.jpg";
 import suzuImg from "../assets/team/suzu-karki.jpg";
@@ -14,7 +13,6 @@ import nishantImg from "../assets/team/nishant.jpg";
 
 const team = [
   { name: "Roshana Sapkota", img: roshanaImg },
-  { name: "Depcena Thapa", img: depcenaImg },
   { name: "Bidhya Raj Shiwakoti", img: bidhyaImg },
   { name: "Sushan Karki", img: sushanImg },
   { name: "Suzu Karki", img: suzuImg },
