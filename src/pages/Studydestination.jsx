@@ -1,6 +1,6 @@
 import AbroadStudySection from "../components/Abroad";
 import EventsSection from "../components/Event";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Example from "../components/offer";
 import AdmissionSteps from "../components/Steps";

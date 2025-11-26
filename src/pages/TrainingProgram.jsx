@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 import TrainingProgramsSection from "../components/TrainingProgramsSection";
 import CoursesBanner from "../components/CoursesBanner";
 import WhyChooseTraining from "../components/whychooseus";

@@ -1,7 +1,7 @@
 // Australia_Detail.jsx
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 
 const faqData = [
   {
