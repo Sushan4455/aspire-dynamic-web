@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Destinationpage from "./pages/Studydestination";
-import Courses from "./pages/Courses";   // ✅ correct import
+import Courses from "./pages/Courses";   
 import TrainingProgram from "./pages/TrainingProgram";
 import TeamPage from "./pages/Teams";
 import Contact from "./pages/Contact";
@@ -15,11 +15,15 @@ import Japan_Detail from "./pages/Japan_Detail";
 import Dubai_Detail from "./pages/Dubai_Detail";
 import CourseRegistration from "./pages/CourseRegistration";
 import ChatbotWidget from "./components/ChatbotWidget";
+import Footer from "./components/Footer";
 
 export default function App() {
+  console.log("Space:", import.meta.env.VITE_CTF_SPACE_ID);
+  console.log("Token:", import.meta.env.VITE_CTF_DELIVERY_TOKEN);
   return (
     <>
       <Routes>
+        /blogs/:id
         <Route path="/" element={<HomePage />} />
         <Route path="/study-destination" element={<Destinationpage />} />
         <Route path="/courses" element={<Courses />} />  {/* ✅ fixed */}
@@ -27,7 +31,7 @@ export default function App() {
         <Route path="/team" element={<TeamPage />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/blogs" element={<BlogPage />} />  
-        <Route path="/blogs/:id" element={<BlogDetailPage />} />
+        <Route path="/blog/:slug" element={<BlogDetailPage />} />
         <Route path="/study-in-uk" element={<UK_Detail />} />
         <Route path="/study-in-australia" element={<Australia_Detail />} />
         <Route path="/study-in-usa" element={<USA_Detail />} />
@@ -36,6 +40,7 @@ export default function App() {
         <Route path="/study-in-dubai" element={<Dubai_Detail />} />
         <Route path="/course-registration" element={<CourseRegistration />} />    
       </Routes>
+      <Footer />
       <ChatbotWidget />
     </>
   );

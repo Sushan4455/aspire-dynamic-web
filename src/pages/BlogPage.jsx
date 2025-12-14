@@ -1,105 +1,151 @@
+// src/pages/LatestBlogsFromGAS.jsx
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
-
 import { Link } from "react-router-dom";
+// adjust path if your components folder differs
+import BlogCard from "../components/Blog"; // <-- use this if your file default-exports the card as BlogCard
+import Navbar from "../components/Navbar";
+// If your file default-exports a component named `Blog`, change above to:
+// import Blog from "../components/blog";
 
 const BLOG_API_URL =
   "https://script.google.com/macros/s/AKfycbynlH8HAdsS6QtwPUk9OFglhtyNO9knZJcZqYM6cTR7CNiqWm-aWDQojsNXHulhY_z6EQ/exec";
 
-export default function Blogs() {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+export default function LatestBlogsFromGAS() {
+  const [posts, setPosts] = useState(null); // null = loading
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(BLOG_API_URL)
-      .then((res) => res.json())
-      .then((data) => {
-        setPosts(data || []);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Blog list fetch error:", err);
-        setLoading(false);
-      });
+    let cancelled = false;
+
+    async function fetchBlogs() {
+      try {
+        setError(null);
+        setPosts(null);
+
+        const res = await fetch(BLOG_API_URL);
+        const rawText = await res.text();
+
+        let data;
+        try {
+          data = rawText ? JSON.parse(rawText) : null;
+        } catch (parseErr) {
+          console.error("GAS returned non-JSON:", rawText);
+          throw new Error("Invalid JSON from blog API");
+        }
+
+        console.log("raw blog data:", data);
+
+        // Normalize into an array
+        let items = [];
+        if (Array.isArray(data)) items = data;
+        else if (data && typeof data === "object") {
+          if (Array.isArray(data.posts)) items = data.posts;
+          else if (Array.isArray(data.data)) items = data.data;
+          else if (Array.isArray(data.result)) items = data.result;
+          else {
+            // fallback to object values if many values look like posts
+            const values = Object.values(data).filter(Boolean);
+            const haveTitle = values.filter(v => v && typeof v === "object" && ("title" in v || "name" in v)).length;
+            if (values.length > 0 && haveTitle >= Math.floor(values.length / 2)) {
+              items = values;
+            } else {
+              items = [];
+            }
+          }
+        } else {
+          items = [];
+        }
+
+        const cleaned = items
+          .filter(Boolean)
+          .map(item => (typeof item === "object" ? item : { title: String(item) }));
+
+        if (!cancelled) setPosts(cleaned);
+      } catch (err) {
+        console.error("Error fetching blogs:", err);
+        if (!cancelled) {
+          setError(err.message || "Failed to fetch blogs");
+          setPosts([]); // show empty state
+        }
+      }
+    }
+
+    fetchBlogs();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return (
     <>
-      <Navbar />
-
-      <section className="w-full bg-slate-50 py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
-          {/* Heading */}
-          <div className="text-center mb-10">
-            <p className="text-xs font-semibold tracking-[0.25em] uppercase text-indigo-500">
-              Blog
-            </p>
-            <h1 className="mt-2 text-3xl md:text-4xl font-bold text-slate-900">
-              Latest Guides & Updates
-            </h1>
-            <p className="mt-3 text-sm md:text-base text-slate-600 max-w-2xl mx-auto">
-              Explore articles on visas, universities, exams, and study abroad
-              tips specially written for Nepali students.
-            </p>
+    <Navbar />
+    <div className="min-h-screen bg-white text-slate-900">
+      <header className="bg-slate-50">
+        <div className="max-w-5xl mx-auto px-6 py-20 text-center">
+          <div className="inline-block text-indigo-600 font-semibold tracking-widest text-sm mb-4">
+            BLOG
           </div>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-4">
+            Latest Guides & Updates
+          </h1>
+          <p className="max-w-2xl mx-auto text-slate-600">
+            Explore articles on visas, universities, exams, and study abroad tips
+            specially written for Nepali students.
+          </p>
 
-          {/* List */}
-{loading ? (
-  <p className="text-center text-sm text-slate-500">Loading blogs...</p>
-) : posts.length === 0 ? (
-  <p className="text-center text-sm text-slate-500">
-    No blogs have been published yet.
-  </p>
-) : (
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-    {posts.map((post) => (
-      <article
-        key={post.id}
-        className="group bg-white rounded-3xl border border-slate-100 shadow-[0_18px_40px_rgba(15,23,42,0.06)] overflow-hidden flex flex-col hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(15,23,42,0.15)] transition"
-      >
-        {post.image && (
-          <div className="h-44 overflow-hidden">
-            <img
-              src={post.image}
-              alt={post.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
+          {posts && posts.length === 0 && (
+            <p className="mt-8 text-slate-500">No blogs have been published yet.</p>
+          )}
+        </div>
+      </header>
+
+      <main className="max-w-7xl mx-auto px-6 py-12">
+        {error && (
+          <div className="mb-6 p-4 rounded-md bg-red-50 text-red-700 border border-red-100">
+            Error loading blogs: {error}
           </div>
         )}
 
-        <div className="p-6 flex flex-col flex-1">
-          <h2 className="text-lg font-semibold text-slate-900 mb-2 line-clamp-2">
-            {post.title}
-          </h2>
-          <p className="text-sm text-slate-600 flex-1 mb-4 line-clamp-3">
-            {post.excerpt}
-          </p>
-
-          <div className="mt-auto pt-2 flex items-center justify-between">
-            <span className="text-[11px] text-slate-400">
-              {/* optional: date if your API has it */}
-            </span>
-
-            {/* ✅ Link to blog detail page */}
-            <Link
-              to={`/blogs/${post.id}`}
-              className="text-xs font-semibold text-indigo-600 group-hover:text-indigo-700 inline-flex items-center"
-            >
-              Read article
-              <span className="ml-1 group-hover:translate-x-0.5 transition-transform">
-                →
-              </span>
-            </Link>
+        {posts === null && (
+          <div className="text-center py-16">
+            <span className="inline-block animate-pulse bg-slate-200 h-4 w-44 rounded"></span>
+            <div className="mt-4 text-slate-500">Loading articles…</div>
           </div>
-        </div>
-      </article>
-    ))}
-  </div>
-)}
-        </div>
-      </section>
+        )}
 
+        {posts && posts.length > 0 && (
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {posts.map((p, idx) => {
+              // Map your GAS fields to the card's props.
+              // Adapt these keys if your sheet uses different column names.
+              const normalized = {
+                id: p.id ?? p.ID ?? p.slug ?? p.title ?? `post-${idx}`,
+                title: p.title ?? p.name ?? p.heading ?? `Untitled ${idx + 1}`,
+                excerpt: p.excerpt ?? p.summary ?? p.description ?? "",
+                image: p.image ?? p.thumbnail ?? p.img ?? "",
+                tags:
+                  Array.isArray(p.tags) ? p.tags
+                  : typeof p.tags === "string" ? p.tags.split(",").map(t => t.trim()).filter(Boolean)
+                  : [],
+                author: p.author ?? p.by ?? p.writer ?? "Team",
+                date: p.date ?? p.published_at ?? p.publishedAt ?? "",
+                minutes: p.minutes ?? p.read_time ?? null,
+                _raw: p,
+              };
 
+              // Ensure the card receives a defined `post` prop (avoids destructure crash)
+              return (
+                <div key={normalized.id ?? `post-${idx}`}>
+                  {/* If your component file exports default with a different name, adjust above import */}
+                  <BlogCard post={normalized} />
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </main>
+    </div>
+    
     </>
   );
 }

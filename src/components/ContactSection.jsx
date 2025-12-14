@@ -104,7 +104,7 @@ export default function ContactSection() {
               <div className="h-[260px] md:h-[300px]">
                 <iframe
                   title="Aspire Location"
-                  src="https://www.google.com/maps?q=Sukedhara%20Kathmandu%20Nepal&output=embed"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4753.738012095279!2d85.34156586643776!3d27.730182899133865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19c54e8c4075%3A0xd5c17fa4a9636adc!2sAspire%20Career%20Education%20Consultancy%20(ACEC)!5e0!3m2!1sen!2snp!4v1764204035224!5m2!1sen!2snp"
                   className="w-full h-full border-0"
                   loading="lazy"
                   allowFullScreen
