@@ -1,45 +1,73 @@
 import { Routes, Route } from "react-router-dom";
+
+/* -------- PUBLIC PAGES -------- */
 import HomePage from "./pages/HomePage";
 import Destinationpage from "./pages/Studydestination";
-import Courses from "./pages/Courses";   
+import Courses from "./pages/Courses";
 import TrainingProgram from "./pages/TrainingProgram";
 import TeamPage from "./pages/Teams";
 import Contact from "./pages/Contact";
 import BlogPage from "./pages/BlogPage";
 import BlogDetailPage from "./pages/BlogDetailsPage";
-import UK_Detail from "./pages/UK_Detail";   
+import UK_Detail from "./pages/UK_Detail";
 import Australia_Detail from "./pages/Australia_Detail";
 import USA_Detail from "./pages/USA_Detail";
 import Canada_Detail from "./pages/Canada_Detail";
 import Japan_Detail from "./pages/Japan_Detail";
 import Dubai_Detail from "./pages/Dubai_Detail";
 import CourseRegistration from "./pages/CourseRegistration";
+
+/* -------- NEW BLOG CMS (PUBLIC) -------- */
+
+
+/* -------- ADMIN BLOG CMS -------- */
+
+/* -------- GLOBAL COMPONENTS -------- */
 import ChatbotWidget from "./components/ChatbotWidget";
 import Footer from "./components/Footer";
 
 export default function App() {
-  console.log("Space:", import.meta.env.VITE_CTF_SPACE_ID);
-  console.log("Token:", import.meta.env.VITE_CTF_DELIVERY_TOKEN);
   return (
     <>
       <Routes>
-        /blogs/:id
+        {/* -------- CORE PAGES -------- */}
         <Route path="/" element={<HomePage />} />
         <Route path="/study-destination" element={<Destinationpage />} />
-        <Route path="/courses" element={<Courses />} />  {/* ✅ fixed */}
+        <Route path="/courses" element={<Courses />} />
         <Route path="/training" element={<TrainingProgram />} />
         <Route path="/team" element={<TeamPage />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/blogs" element={<BlogPage />} />  
-        <Route path="/blog/:slug" element={<BlogDetailPage />} />
+        <Route path="/course-registration" element={<CourseRegistration />} />
+
+        {/* -------- STUDY DESTINATION DETAILS -------- */}
         <Route path="/study-in-uk" element={<UK_Detail />} />
         <Route path="/study-in-australia" element={<Australia_Detail />} />
         <Route path="/study-in-usa" element={<USA_Detail />} />
         <Route path="/study-in-canada" element={<Canada_Detail />} />
         <Route path="/study-in-japan" element={<Japan_Detail />} />
         <Route path="/study-in-dubai" element={<Dubai_Detail />} />
-        <Route path="/course-registration" element={<CourseRegistration />} />    
+
+        {/* -------- EXISTING BLOG (OPTIONAL / LEGACY) -------- */}
+        <Route path="/blogs-old" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<BlogDetailPage />} />
+
+        {/* -------- NEW BLOG CMS (PUBLIC) -------- */}
+
+        {/* -------- BLOG ADMIN DASHBOARD -------- */}
+
+
+        {/* -------- 404 FALLBACK -------- */}
+        <Route
+          path="*"
+          element={
+            <div className="min-h-screen flex items-center justify-center text-slate-500">
+              404 – Page not found
+            </div>
+          }
+        />
       </Routes>
+
+      {/* -------- GLOBAL UI -------- */}
       <Footer />
       <ChatbotWidget />
     </>
